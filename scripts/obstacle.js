@@ -17,7 +17,8 @@ if (innerWidth > 425) {
 
 
 const createPipe = () => {
-  openingPostition = Math.floor(Math.random() * 80);
+  // openingPostition = Math.floor(Math.random() * 80);
+  openingPostition = 50
   const pipe = document.createElement("div");
   const opening = document.createElement("div");
   if (innerWidth <= 425) {
@@ -78,12 +79,12 @@ const movePipe = () => {
 
 
 
-  console.log("opening Position", innerHeight * (openingPostition / 100));
   if (pipe[pipe.length - 1].offsetLeft <= 180 && window.innerWidth <= 427) {
-
-
+    
+    console.log("opening position percentage", openingPostition)
+    console.log("opening Position", innerHeight * (openingPostition / 100));
     console.log("Player Position", position);
-    if(position >= (openingPostition - 75)   && position <= (openingPostition + 75) ){
+    if(position >= (openingPostition + 75)   && position <= (openingPostition - 75) ){
       score++;
     }
     else{

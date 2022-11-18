@@ -2,7 +2,7 @@ const player = document.querySelector("#player");
 const page = document.querySelector("body");
 
 
-let position = window.innerHeight / 2 ;
+let position = 500 ;
 let velocity = .005;
 let gravity = 0.01807;
 let upForce;
@@ -47,7 +47,7 @@ const reset = () => {
   clearInterval(theLift)
   clearInterval(gameStart)
   
-  position = innerHeight / 2;
+  position = 500;
 }
 
 // Starting to fall
