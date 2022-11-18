@@ -1,5 +1,5 @@
 :root {
-  --height: 0px;
+  --height: 50vh;
   --pipePosition: 1000px;
 }
 
@@ -13,10 +13,11 @@ html {
 
 #player {
   background-color: greenyellow;
-  position: fixed;
+  position: absolute;
   height: 50px;
   width: 50px;
-  top: var(--height)
+  top: var(--height);
+  left: 30vw;
 }
 
 #pipe {
@@ -27,3 +28,14 @@ html {
   margin: 0px;
   left: var(--pipePosition);
 }
+/* @media (min-width: 430px){
+  #player {
+    background-color: greenyellow;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    top: var(--height);
+    left: 500px;
+  }
+}
+   */

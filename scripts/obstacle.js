@@ -1,15 +1,31 @@
 const pipeArea = document.querySelector("#pipeGeneration")
+
 let startingPostion = 1000;
 let pipePosition = 1000;
 let gameStart;
 let speedCounter = 0;
 let speed = 1;
+let openingPostition;
+let openingGap = 150;
+let score = 0;
+
+
+if (innerWidth > 425) {
+  speed = 2;
+  startingPostion = 2000;
+}
+
 
 const createPipe = () => {
+  openingPostition = Math.floor(Math.random() * 80);
   const pipe = document.createElement("div");
   const opening = document.createElement("div");
-  pipePosition = 1000;
-
+  if (innerWidth <= 425) {
+    pipePosition = 1000;
+  }
+  else {
+    pipePosition = 2000;
+  }
   pipe.style.setProperty("position", "absolute")
   pipe.style.setProperty("background-color", "darkGreen");
   pipe.style.setProperty("height", "100vh");
@@ -19,9 +35,15 @@ const createPipe = () => {
   pipe.classList.add("pipe");
 
   opening.style.setProperty("position", "absolute");
-  opening.style.setProperty("background-col")
+  opening.style.setProperty("background-color", "#121212");
+  opening.style.setProperty("height", `${openingGap}px`);
+  opening.style.setProperty("width", "100px");
+  opening.style.setProperty("top", `${openingPostition}%`)
+  opening.style.setProperty("left", `${startingPostion}px`);
 
+  opening.classList.add("opening");
   pipeArea.appendChild(pipe);
+  pipeArea.appendChild(opening);
 }
 
 
@@ -29,24 +51,49 @@ const movePipe = () => {
 
   // Pipe Generation
   // Pipe generation formula (pipepostion / speed) + 100
-  const formula = (startingPostion / speed) + 100
-  if (speedCounter % formula == 0) {
-    createPipe();
+  if (innerWidth <= 425) {
+    const formula = (startingPostion / speed) + 100;
+    if (speedCounter % formula == 0) {
+      createPipe();
+    }
   }
 
+  else {
+    const formula = (startingPostion / speed) + 100;
+    if (speedCounter % formula == 0) {
+      createPipe();
+    }
+  }
   speedCounter++;
 
 
   // Pipe Speed
-  const pipe = pipeArea.lastElementChild;
+  const pipe = document.querySelectorAll(".pipe");
+  const opening = document.querySelectorAll(".opening")
   pipePosition -= speed;
-  pipe.style.setProperty("left", `${pipePosition}px`)
+  pipe[pipe.length - 1].style.setProperty("left", `${pipePosition}px`)
+  opening[pipe.length - 1].style.setProperty("left", `${pipePosition}px`)
+
+  // console.log(pipe[pipe.length - 1].offsetLeft)
+
+
+
+  console.log("opening Position", innerHeight * (openingPostition / 100));
+  if (pipe[pipe.length - 1].offsetLeft <= 180 && window.innerWidth <= 427) {
+
+
+    console.log("Player Position", position);
+    if(position >= (openingPostition - 75)   && position <= (openingPostition + 75) ){
+      score++;
+    }
+    else{
+      reset();
+    }
+  }
 
 }
 
 gameStart = setInterval(movePipe, 1);
-
-// movePipe();
 
 
 
