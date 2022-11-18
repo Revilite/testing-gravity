@@ -1,5 +1,5 @@
 const player = document.querySelector("#player");
-const page = document.querySelector("html");
+const page = document.querySelector("body");
 
 
 let position = .01;
@@ -44,7 +44,7 @@ const goUp = () => {
 
 
 // Starting to fall
-theFall = setInterval(goDown, 1);
+// theFall = setInterval(goDown, 1);
 
 page.addEventListener("keydown", (e) => {
 
@@ -53,6 +53,7 @@ page.addEventListener("keydown", (e) => {
   if (e.key == "Enter") {
     clearInterval(theFall)
     clearInterval(theLift)
+    clearInterval(gameStart)
   }
 
   if (e.key == "w") {
