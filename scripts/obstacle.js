@@ -27,8 +27,10 @@ const createPipe = () => {
   else {
     pipePosition = 2000;
   }
+
+
   pipe.style.setProperty("position", "absolute")
-  pipe.style.setProperty("background-color", "darkGreen");
+  pipe.style.setProperty("background-image", "url('sprites/pipe.png')")
   pipe.style.setProperty("height", "100vh");
   pipe.style.setProperty("width", "100px");
   pipe.style.setProperty("margin", "0px");
@@ -36,7 +38,8 @@ const createPipe = () => {
   pipe.classList.add("pipe");
 
   opening.style.setProperty("position", "absolute");
-  opening.style.setProperty("background-color", "#121212");
+  opening.style.setProperty("background-image", "url('sprites/opening.png')");
+  opening.style.setProperty("background-size", "cover");
   opening.style.setProperty("height", `${openingGap}px`);
   opening.style.setProperty("width", "100px");
   opening.style.setProperty("top", `${openingPostition}%`)
@@ -81,10 +84,6 @@ const movePipe = () => {
   opening[pipe.length - 1].style.setProperty("left", `${pipePosition}px`)
 
   // console.log(pipe[pipe.length - 1].offsetLeft)
-  console.log(Math.floor(playerDetection.right))
-  console.log(pipeDetection.left)
-
-
 
   if (Math.floor(playerDetection.right) >= openingDetection.left &&
     Math.floor(playerDetection.left) <= openingDetection.right) {

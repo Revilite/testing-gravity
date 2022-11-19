@@ -46,8 +46,16 @@ const reset = () => {
   clearInterval(theFall)
   clearInterval(theLift)
   clearInterval(gameStart)
-  
-  position = 500;
+  const pipes = document.querySelectorAll(".pipe");
+  const openings = document.querySelectorAll(".opening")
+
+  // for(let i = 0; i < pipes.length; i++){
+  //   pipes[i].remove();
+  //   openings[i].remove();
+  // }
+
+  position = innerHeight / 2;
+  player.style.setProperty("top", `${position}px`)
 }
 
 // Starting to fall
