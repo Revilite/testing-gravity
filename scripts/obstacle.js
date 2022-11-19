@@ -17,8 +17,8 @@ if (innerWidth > 425) {
 
 
 const createPipe = () => {
-  // openingPostition = Math.floor(Math.random() * 80);
-  openingPostition = 50
+  openingPostition = Math.floor(Math.random() * 80);
+  // openingPostition = 50
   const pipe = document.createElement("div");
   const opening = document.createElement("div");
   if (innerWidth <= 425) {
@@ -71,26 +71,34 @@ const movePipe = () => {
   // Pipe Speed
   const pipe = document.querySelectorAll(".pipe");
   const opening = document.querySelectorAll(".opening")
+
+  const openingDetection = opening[opening.length - 1].getBoundingClientRect();
+  const pipeDetection = pipe[pipe.length - 1].getBoundingClientRect();
+  const playerDetection = player.getBoundingClientRect();
+
   pipePosition -= speed;
   pipe[pipe.length - 1].style.setProperty("left", `${pipePosition}px`)
   opening[pipe.length - 1].style.setProperty("left", `${pipePosition}px`)
 
   // console.log(pipe[pipe.length - 1].offsetLeft)
+  console.log(Math.floor(playerDetection.right))
+  console.log(pipeDetection.left)
 
 
 
-  if (pipe[pipe.length - 1].offsetLeft <= 180 && window.innerWidth <= 427) {
-    
-    console.log("opening position percentage", openingPostition)
-    console.log("opening Position", innerHeight * (openingPostition / 100));
-    console.log("Player Position", position);
-    if(position >= (openingPostition + 75)   && position <= (openingPostition - 75) ){
+  if (Math.floor(playerDetection.right) >= openingDetection.left &&
+    Math.floor(playerDetection.left) <= openingDetection.right) {
+    if (Math.floor(playerDetection.bottom < openingDetection.bottom && playerDetection.top > openingDetection.top)) {
+      if(Math.floor(playerDetection.left) == openingDetection.right){
+      console.log("score hit")
       score++;
     }
-    else{
+    }
+    else {
       reset();
     }
   }
+
 
 }
 
