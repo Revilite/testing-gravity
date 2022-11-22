@@ -1,10 +1,13 @@
 const player = document.querySelector("#player");
 const page = document.querySelector("body");
+const title = document.querySelector("#title");
+const scoreEL = document.querySelector("#score");
+const startGame = document.querySelector("#startGame");
 
-
-let position = 500 ;
+let position = 500;
 let velocity = .005;
 let gravity = 0.01807;
+let gameCounter = 0;
 let upForce;
 let theLift;
 let theFall;
@@ -21,8 +24,7 @@ const goDown = () => {
   }
   //Loop future height detection
   if (position >= window.innerHeight || position <= 0) {
-    position = window.innerHeight / 2 + 200;
-    // clearInterval(theFall)
+    reset();
   }
 }
 
@@ -46,13 +48,6 @@ const reset = () => {
   clearInterval(theFall)
   clearInterval(theLift)
   clearInterval(gameStart)
-  const pipes = document.querySelectorAll(".pipe");
-  const openings = document.querySelectorAll(".opening")
-
-  // for(let i = 0; i < pipes.length; i++){
-  //   pipes[i].remove();
-  //   openings[i].remove();
-  // }
 
   position = innerHeight / 2;
   player.style.setProperty("top", `${position}px`)
@@ -70,9 +65,19 @@ page.addEventListener("keydown", (e) => {
     clearInterval(theLift)
     clearInterval(gameStart)
   }
+  if (e.key == "ArrowRight") {
+    movePipe();
+  }
+});
 
-  if (e.key == "w") {
+page.addEventListener("pointerdown", (e) => {
     //clears spamming issue
+    player.style.setProperty("visibility", "visible");
+    title.style.setProperty("display", "none");
+    scoreEL.style.setProperty("display", "none");
+    startGame.style.setProperty("display", "none");
+  
+
     if (theLift) {
       clearInterval(theLift)
     }
@@ -80,9 +85,10 @@ page.addEventListener("keydown", (e) => {
     upForce = 1.5;
     clearInterval(theFall)
     theLift = setInterval(goUp, 1);
-  }
-  if (e.key == "ArrowRight"){
-    movePipe();
-  }
 
-})
+    if (gameCounter == 0) {
+      gameStart = setInterval(movePipe, 1);
+      gameCounter++;
+    }
+  }
+)

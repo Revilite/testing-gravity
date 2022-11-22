@@ -2,12 +2,12 @@ const pipeArea = document.querySelector("#pipeGeneration")
 
 let startingPostion = 1000;
 let pipePosition = 1000;
-let gameStart;
 let speedCounter = 0;
 let speed = 1;
-let openingPostition;
-let openingGap = 150;
+let openingGap = 250;
 let score = 0;
+let openingPostition;
+let gameStart;
 
 
 if (innerWidth > 425) {
@@ -17,8 +17,7 @@ if (innerWidth > 425) {
 
 
 const createPipe = () => {
-  openingPostition = Math.floor(Math.random() * 80);
-  // openingPostition = 50
+  openingPostition = Math.floor((Math.random() * 60) + 10);
   const pipe = document.createElement("div");
   const opening = document.createElement("div");
   if (innerWidth <= 425) {
@@ -78,7 +77,6 @@ const movePipe = () => {
   const opening = document.querySelectorAll(".opening")
 
   const openingDetection = opening[opening.length - 1].getBoundingClientRect();
-  const pipeDetection = pipe[pipe.length - 1].getBoundingClientRect();
   const playerDetection = player.getBoundingClientRect();
 
   pipePosition -= speed;
@@ -90,20 +88,17 @@ const movePipe = () => {
   if (Math.floor(playerDetection.right) >= openingDetection.left &&
     Math.floor(playerDetection.left) <= openingDetection.right) {
     if (Math.floor(playerDetection.bottom < openingDetection.bottom && playerDetection.top > openingDetection.top)) {
-      if(Math.floor(playerDetection.left) == openingDetection.right){
-      console.log("score hit")
-      score++;
-    }
+      if (Math.floor(playerDetection.left) == openingDetection.right) {
+        console.log("score hit")
+        score++;
+      }
     }
     else {
       reset();
     }
   }
-
-
 }
 
-gameStart = setInterval(movePipe, 1);
 
 
 
