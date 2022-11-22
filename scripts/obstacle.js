@@ -35,6 +35,7 @@ const createPipe = () => {
   pipe.style.setProperty("width", "100px");
   pipe.style.setProperty("margin", "0px");
   pipe.style.setProperty("left", `${startingPostion}px`);
+  pipe.style.setProperty("order", "2");
   pipe.classList.add("pipe");
 
   opening.style.setProperty("position", "absolute");
@@ -44,6 +45,7 @@ const createPipe = () => {
   opening.style.setProperty("width", "100px");
   opening.style.setProperty("top", `${openingPostition}%`)
   opening.style.setProperty("left", `${startingPostion}px`);
+  pipe.style.setProperty("order", "2");
 
   opening.classList.add("opening");
   pipeArea.appendChild(pipe);
