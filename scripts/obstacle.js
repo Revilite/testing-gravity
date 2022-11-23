@@ -2,17 +2,18 @@ const pipeArea = document.querySelector("#pipeGeneration")
 
 let startingPostion = 1000;
 let pipePosition = 1000;
-let speedCounter = 0;
+let speedCounter = 1100;
 let speed = 1;
 let openingGap = 250;
 let score = 0;
 let openingPostition;
 let gameStart;
-
+let progression = 1;
 
 if (innerWidth > 425) {
   speed = 2;
   startingPostion = 2000;
+  progression = 2;
 }
 
 
@@ -79,18 +80,21 @@ const movePipe = () => {
   const openingDetection = opening[opening.length - 1].getBoundingClientRect();
   const playerDetection = player.getBoundingClientRect();
 
-  pipePosition -= speed;
+  pipePosition -= progression;
   pipe[pipe.length - 1].style.setProperty("left", `${pipePosition}px`)
   opening[pipe.length - 1].style.setProperty("left", `${pipePosition}px`)
-
-  // console.log(pipe[pipe.length - 1].offsetLeft)
-
-  if (Math.floor(playerDetection.right) >= openingDetection.left &&
-    Math.floor(playerDetection.left) <= openingDetection.right) {
+  
+  if (Math.floor(playerDetection.right) >= openingDetection.left && Math.floor(playerDetection.left) <= openingDetection.right) {
     if (Math.floor(playerDetection.bottom < openingDetection.bottom && playerDetection.top > openingDetection.top)) {
-      if (Math.floor(playerDetection.left) == openingDetection.right) {
-        console.log("score hit")
+      if (Math.floor(playerDetection.left) == openingDetection.right)  {
+        // if (Math.floor(playerDetection.left) == openingDetection.right - 1 || Math.floor(playerDetection.left) == openingDetection.right)  {
+
         score++;
+        const highscore = localStorage.getItem("score");
+        if(score >= highscore || highscore == null){
+          localStorage.setItem("score", score);
+        }
+
       }
     }
     else {
